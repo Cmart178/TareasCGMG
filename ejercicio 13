@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+int main()
+{
+        srand(time(0));
+        int incognito = rand() % 100 + 1;
+        int intento;
+        int vecesin = 0;
+        do {
+            cout << "adivina el numero que esta entre 1 al 100: ";
+            cin >> intento;
+            vecesin++;
+            if (intento < incognito) {
+                cout << "Numero bajo, intente de nuevo" << endl;
+            }
+            else if (intento > incognito) {
+                cout << "numero alto, intente de nuevo." << endl;
+            }
+            else if (intento==incognito){
+                cout<< "el numero correcto es " <<incognito<< ", lo consiguio despues " << vecesin << " intentos" << endl;
+                char JugarDeNuevo;
+                cout << "Quieres jugar de nuevo (y/n) ";
+                cin >> JugarDeNuevo;
+                if (JugarDeNuevo == 'y') {
+                    incognito = rand() % 100 + 1;
+                    vecesin = 0;
+                }
+                else if(JugarDeNuevo == 'n') {
+                    cout << "Gracias por jugar.";
+                    break;
+                }
+            }
+        } while (true);
+    }
