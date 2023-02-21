@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+        double dato, suma = 0.0;
+        for (int i = 0; i < 5; i++) {
+            cout << "Introduce el dato " << i + 1 << ": ";
+            cin >> dato;
+            suma = suma + dato;
+        }
+        cout << "La suma de los 5 datos introducidos es: " << suma<< " Y el promedio es: " << (suma/5) << endl;
+
+        return 0;
+ }
