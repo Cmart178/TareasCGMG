@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+        int i = 8;
+        int j = 0;
+        while (i <= 23) {
+            cout << "pon el numero: " << i << " ";
+            cin >> j;
+            if (j != i) {
+               cout << "numero equivocado " << i << " puso " << j << "\n" << std::endl;
+               cout << "Intentar de nuevo \n";
+               cout << "pon el numero " << i << ":";
+               cin >> j;
+            }
+            i++;
+        }
+    }
