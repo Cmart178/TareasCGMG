@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+        int valorpe = std::numeric_limits<int>::max();
+        int datoNuevo;
+        for (int i = 0; i < 10; i++) {
+            std::cout << "Agrega un valor entero " << i << ": ";
+            std::cin >> datoNuevo;
+
+            if (datoNuevo < valorpe) {
+                valorpe = datoNuevo;
+            }
+        }
+
+        std::cout << "El Valor más pequeño: " << valorpe << std::endl;
+    
+}
