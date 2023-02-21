@@ -2,15 +2,17 @@
 using namespace std;
 int main()
 {
-   int i, j;
-        for (i = 8; i <= 23; i++) {
-            cout << "pon el numero " << i << ":";
+        int i = 8;
+        int j = 0;
+        while (i <= 23) {
+            cout << "pon el numero: " << i << " ";
             cin >> j;
             if (j != i) {
-                cout << "numero equivocado " << i << " puso " << j <<"\n" << std::endl;
-                cout << "Intentar de nuevo \n";
-                cout << "pon el numero " << i << ":";
-                cin >> j;
+               cout << "numero equivocado " << i << " puso " << j << "\n" << std::endl;
+               cout << "Intentar de nuevo \n";
+               cout << "pon el numero " << i << ":";
+               cin >> j;
             }
+            i++;
         }
     }
