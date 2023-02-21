@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+        int Altura = 0;
+        int Base = 0; 
+        int Total= 0;
+        cout << "Ingrese un valor de altura: ";
+        cin >> Altura;
+        cout << "Ingrese un valor de base: ";
+        cin >> Base;
+        cout << "La area de la figura es: " << (Total = (Altura * Base));
+        cout << "El Perimetro de la figura es:" << (Total = (2 * Altura) + (2 * Base)) << std::endl;
+    }
