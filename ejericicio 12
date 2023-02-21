@@ -1,0 +1,26 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+bool esprimo(int n) {
+    if (n <= 1) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+int main()
+{
+        int n;
+        cout << "Ingrese numero entero: ";
+        cin >> n;
+        if (esprimo(n)) {
+            cout << n << " es numero primo." << endl;
+        }
+        else {
+            cout << n << " no es numero primo." << endl;
+        }
+    }
