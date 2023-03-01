@@ -6,15 +6,16 @@ bool esprimo(int n) {
         return false;
     }
     for (int i = 2; i <= sqrt(n); i++) {
-        if (n % i == 0) {
-            return false;
+        if (n % i) {
+            return true;
         }
     }
-    return true;
+    return false;
 }
 int main()
 {
         int n;
+    
         cout << "Ingrese numero entero: ";
         cin >> n;
         if (esprimo(n)) {
