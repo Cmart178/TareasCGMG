@@ -12,3 +12,4 @@ int main()
         cout << "La area de la figura es: " << (Total = (Altura * Base));
         cout << "El Perimetro de la figura es:" << (Total = (2 * Altura) + (2 * Base)) << std::endl;
     }
+//
