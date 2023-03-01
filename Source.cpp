@@ -3,24 +3,34 @@
 #include <limits>
 using namespace std;
 using std::pow;
+bool esprimo(int n) {
+    if (n <= 1) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
 int main()
 {
-    //Variables;
-    int lis1[5], size = 0;
-    int numero;
-    int i, j;
-    int AC, BC, CC = 0;
     int opus;
     /// Menú del programa que contiene la serie de ejericios, te permite escoje uno de los ejercicios disponibles. 
     cout << 
         "///Hola, bienvenido a los ejercicios programados por C.G.M.G/// \n"
         "Escoje que programa quieres correr, introduce el valor corresponiente \n"
-        "1. Altura y Perimetro de un rectangulo. \n"
-        "2. Suma de enteros y promedio.  \n"
-        "3. Distancias entre dos puntos. \n"
-        "4. Entrar numeros del 8 al 23. \n"
-        "5. Altura y Perimetro usando while.\n"
-        "6. Entrar nuemeros enteros y que indique el valor mas bajo. \n"
+        " 1. Altura y Perimetro de un rectangulo. \n"
+        " 2. Suma de enteros y promedio.  \n"
+        " 3. Distancias entre dos puntos. \n"
+        " 4. Entrar numeros del 8 al 23. \n"
+        " 5. Entrar numeros del 8 al 23 usando while\n"
+        " 6. Entrar numeros enteros y que indique el valor mas bajo. \n"
+        " 7. Calculo de secuencia de fibonacci. \n"
+        " 8. Calculo de factoriales. \n"
+        " 9. identificador de numero primo. \n"
+        "10. Adivinar numero al azar. \n"
         << std::endl;
     cout << "opcion seleccionada:" << std::endl;
     cin >> opus;
@@ -71,6 +81,7 @@ int main()
         }
     ////
     if (opus == 4) {
+        int i, j;
         for (i = 8; i <= 23; i++) {
             cout << "pon el numero " << i << ":";
             cin >> j;
@@ -115,7 +126,7 @@ int main()
     }
     ///
     if (opus == 7) {
-        int n, u0 = 1, u1 = 1, u;
+        int n, u0 = 1, u1 = 1, u=05;
 
             cout << "Ingrese variable entera: ";
           cin >> n;
@@ -149,66 +160,50 @@ int main()
         cout << "El factorial de numero " << N << " es " << C << std::endl;
     }
     ///
-    if (opus = 9) {
-        srand(time(0));  // seed the random number generator with the current time
-        int secretNumber = rand() % 100 + 1;  // generate a random number between 1 and 100
-        int guess;
-        int numGuesses = 0;
+    if (opus == 9) {
+        int n;
+        cout << "Ingrese numero entero: ";
+        cin >> n;
+        if (esprimo(n)) {
+            cout << n << " es numero primo." << endl;
+        }
+        else {
+            cout << n << " no es numero primo." << endl;
+        }
+    }
+    else if (opus == 10) {
+        srand(time(0));
+        int incognito = rand() % 100 + 1;
+        int intento;
+        int vecesin = 0;
         do {
-            cout << "Guess a number between 1 and 100: ";
-            cin >> guess;
-            numGuesses++;
-            if (guess < secretNumber) {
-                cout << "Too low! Guess again." << endl;
+            cout << "adivina el numero que esta entre 1 al 100: ";
+            cin >> intento;
+            vecesin++;
+            if (intento < incognito) {
+                cout << "Numero bajo, intente de nuevo" << endl;
             }
-            else if (guess > secretNumber) {
-                cout << "Too high! Guess again." << endl;
+            else if (intento > incognito) {
+                cout << "numero alto, intente de nuevo." << endl;
             }
-            else {
-                cout << "Congratulations, you guessed the number in " << numGuesses << " guesses." << endl;
-                char playAgain;
-                cout << "Do you want to play again? (y/n) ";
-                cin >> playAgain;
-                if (playAgain == 'y') {
-                    secretNumber = rand() % 100 + 1;
-                    numGuesses = 0;
+            else if (intento==incognito){
+                cout<< "el numero correcto es " <<incognito<< ", lo consiguio despues " << vecesin << " intentos" << endl;
+                char JugarDeNuevo;
+                cout << "Quieres jugar de nuevo (y/n) ";
+                cin >> JugarDeNuevo;
+                if (JugarDeNuevo == 'y') {
+                    incognito = rand() % 100 + 1;
+                    vecesin = 0;
                 }
-                else {
+                else if(JugarDeNuevo == 'n') {
+                    cout << "Gracias por jugar.";
                     break;
                 }
             }
         } while (true);
-        return 0;
     }
-    if (opus==10){
-    bool isPrime(int n) {
-    if (n <= 1) {
-        return false;
-    }
-    for (int i = 2; i <= sqrt(n); i++) {
-        if (n % i == 0) {
-            return false;
-        }
-    }
-    return true;
-}
-    int n;
-    cout << "Enter an integer: ";
-    cin >> n;
-    if (isPrime(n)) {
-        cout << n << " is a prime number." << endl;
-    } else {
-        cout << n << " is not a prime number." << endl;
-    }
-    return 0;
-}
-    }
-    if (opus > 10) {
+    if (opus > 11) {
         cout << "Opcion no valida" << std::endl;
     }
-
-
     return 0;
 }
- 
-//int r=rand()%100+1
