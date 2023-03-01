@@ -25,4 +25,3 @@ int main()
 
         cout << "El valor es "<< "u(" << n << ") = " << u << endl;
     }
- 
