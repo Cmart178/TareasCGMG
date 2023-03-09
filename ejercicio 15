@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int** generateRandomSizeTables(int N, int K);
+
+int main() {
+    int N, K;
+    cout << "Enter the size N of the tables: ";
+    cin >> N;
+    if (N <= 10) {
+        cout << "N should be greater than 10." << endl;
+        return 0;
+    }
+    cout << "Enter the quantity K of tables to generate: ";
+    cin >> K;
+    int** tables = generateRandomSizeTables(N, K);
+    for (int i = 0; i < K; i++) {
+        int size = tables[i][0];
+        cout << "Table " << i + 1 << " of size " << size << ": ";
+        for (int j = 1; j <= size; j++) {
+            cout << tables[i][j] << " ";
+        }
+        cout << endl;
+    }
+    // free memory
+    for (int i = 0; i < K; i++) {
+        delete[] tables[i];
+    }
+    delete[] tables;
+    return 0;
+}
+
+int** generateRandomSizeTables(int N, int K) {
+    int** tables = new int*[K];
+    srand(time(NULL));
+    for (int i = 0; i < K; i++) {
+        int size = rand() % (N - 9) + 10; // generate random size between [10, N]
+        tables[i] = new int[size + 1];
+        tables[i][0] = size; // store the size as the first element of the table
+        for (int j = 1; j <= size; j++) {
+            tables[i][j] = rand() % 1001; // generate random values between [0, 1000]
+        }
+    }
+    return tables;
+}
