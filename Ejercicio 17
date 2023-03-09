@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include <time.h>
+
+using namespace std;
+
+//Función para Generar Datos y Tabla
+double** generartablas(int N, int K) {
+ double** tables = new double*[K];
+    srand(time(NULL));
+    for (int i = 0; i < K; i++) {
+        int size = rand() % (N - 9)+10; // tamaño de N
+        tables[i] = new double[size + 1];
+        tables[i][0] = size; 
+        for (int j = 1; j <= size; j++) {
+            tables[i][j] = (double)rand() / RAND_MAX * 1000; //Generar Numeros al azar no enteros
+        }
+    }
+    return tables;
+}
+//Función para imprimir una tabla
+void printTable(double* table, double size) {
+    for (int i = 0; i < size; i++) {
+        cout << table[i] << " ";
+    }
+    cout << endl;
+}
+
+// Función para ordenar las tablas
+clock_t sortTable(double* table, int n) {
+    clock_t tStart = clock();
+    sort(table, table+n, greater<int>());
+    return clock() - tStart;
+}
+
+
+int main() {
+    int N, K;
+    cout << "Pon valor k: ";
+    cin >> K;
+    cout << "Pon Valor N: ";
+    cin >> N;
+    while (N <= 10) {
+        cout << "N deber ser mas grande que 10. \n";
+        cout << "ingrese un dato correcto ";
+        cin >> N;
+
+    }
+    double** tables = generartablas(N, K);  
+    double totalTime = 0;
+    for (int i = 0; i < K; i++) {
+        int size = tables[i][0];
+//            clock_t timeTaken = sortTable(tables[i], tables[i][0]);
+            cout << "Sorted Table " << i+1 << ": ";
+        for (int j = 1; j <= size; j++) {
+
+            cout << tables[i][j] << " ";
+//            printTable(tables[i], tables[i][0]);
+            clock_t timeTaken = sortTable(tables[i], tables[i][j]);
+//            cout << "Time taken: " << timeTaken << " milliseconds" << endl;
+//            totalTime += timeTaken;
+        }
+        cout << endl;
+    }
+    // limpiar memoria
+    for (int i = 0; i < K; i++) {
+        delete[] tables[i];
+    }
+    delete[] tables;
+    return 0;
+}
