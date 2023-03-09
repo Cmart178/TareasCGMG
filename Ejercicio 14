@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Función para generar datos
+double** generateTables(int N, int K) {
+    double** tables = new double*[K];
+    srand(time(0));
+
+    for (int i = 0; i < K; i++) {
+        tables[i] = new double[N];
+        for (int j = 0; j < N; j++) {
+            tables[i][j] = (double)rand() / RAND_MAX * 1000; 
+        }
+    }
+
+    return tables;
+}
+
+int main() {
+    int N, K;
+
+    cout << "El tamañano de N: ";
+    cin >> N;
+    cout << "El tamaño de K: ";
+    cin >> K;
+
+    // Generador de tablas
+    double** tables = generateTables(N, K);
+
+    // imprimir las tablas
+    for (int i = 0; i < K; i++) {
+        cout << "reglon " << i+1 << ": ";
+        for (int j = 0; j < N; j++) {
+            cout << tables[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // vaciar memoria
+    for (int i = 0; i < K; i++) {
+        delete[] tables[i];
+    }
+    delete[] tables;
+
+    return 0;
+}
