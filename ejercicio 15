@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int** generartablas(int N, int K);
+double** generartablas(int N, int K);
 
 int main() {
     int N, K;
@@ -12,16 +12,15 @@ int main() {
     cin >> N;
     while (N <= 10) {
         cout << "N deber ser mas grande que 10. \n";
-        cout << "ingrese un dato correcto";
+        cout << "ingrese un dato correcto ";
         cin >> N;
 
     }
     cout << "Pon valor k: ";
     cin >> K;
-    int** tables = generartablas(N, K);
+    double** tables = generartablas(N, K);
     for (int i = 0; i < K; i++) {
         int size = tables[i][0];
-        cout << "Lista " << i + 1 << " de tamaño " << size << ": ";
         for (int j = 1; j <= size; j++) {
             cout << tables[i][j] << " ";
         }
@@ -35,15 +34,15 @@ int main() {
     return 0;
 }
 
-int** generartablas(int N, int K) {
-    int** tables = new int*[K];
+double** generartablas(int N, int K) {
+ double** tables = new double*[K];
     srand(time(NULL));
     for (int i = 0; i < K; i++) {
         int size = rand() % (N - 9) + 10; 
-        tables[i] = new int[size + 1];
+        tables[i] = new double[size + 1];
         tables[i][0] = size; 
         for (int j = 1; j <= size; j++) {
-            tables[i][j] = rand() % 1001; 
+            tables[i][j] = (double)rand() / RAND_MAX * 1000;
         }
     }
     return tables;
