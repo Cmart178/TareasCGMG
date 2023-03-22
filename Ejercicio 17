@@ -1,9 +1,8 @@
-#include <iostream>
+include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-#include <time.h>
-
+#include <stdio.h>
 using namespace std;
 
 //Función para Generar Datos y Tabla
@@ -20,7 +19,7 @@ double** generartablas(int N, int K) {
     }
     return tables;
 }
-//Función para imprimir una tabla
+//Función para imprimir tabla
 void printTable(double* table, double size) {
     for (int i = 0; i < size; i++) {
         cout << table[i] << " ";
@@ -35,7 +34,6 @@ clock_t sortTable(double* table, int n) {
     return clock() - tStart;
 }
 
-
 int main() {
     int N, K;
     cout << "Pon valor k: ";
@@ -48,19 +46,23 @@ int main() {
         cin >> N;
 
     }
-    double** tables = generartablas(N, K);  
-    double totalTime = 0;
+    double** tables = generartablas(N, K);
     for (int i = 0; i < K; i++) {
         int size = tables[i][0];
-//            clock_t timeTaken = sortTable(tables[i], tables[i][0]);
-            cout << "Sorted Table " << i+1 << ": ";
         for (int j = 1; j <= size; j++) {
-
             cout << tables[i][j] << " ";
-//            printTable(tables[i], tables[i][0]);
-            clock_t timeTaken = sortTable(tables[i], tables[i][j]);
-//            cout << "Time taken: " << timeTaken << " milliseconds" << endl;
-//            totalTime += timeTaken;
+        }
+        cout<<"\n";
+        printTable(tables[i], tables[i][0]);
+        cout<<"\n";
+
+    }
+    for (int i = 0; i < K; i++) {
+            int size = tables[i][0];
+        cout << "tabla ordenada " << i+1 << ": ";
+         for (int j = 0; j <= size; j++) {
+        cout << tables[i][j] << " ";
+        clock_t timeTaken = sortTable(tables[i], tables[i][j]);
         }
         cout << endl;
     }
