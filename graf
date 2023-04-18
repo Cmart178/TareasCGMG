@@ -1,0 +1,97 @@
+#include <iostream>
+#include <vector>
+#include <random>
+#include <fstream>
+#include <string>
+using namespace std;
+// Estructur
+struct Graph {
+    int V;  // número de nodos
+    vector<vector<int>> adj;  // matriz de adyacencia
+    // Constructor
+    Graph(int V) {
+        this->V = V;
+        adj.resize(V, vector<int>(V, 0));
+    }
+    // Añadir una arista entre u y v
+    void addEdge(int u, int v) {
+        adj[u][v] = 1;
+        adj[v][u] = 1;
+    }
+    void printAdjMatrix() {
+        cout << "Matriz de adyacencia:" << endl;
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                cout << adj[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+    // Verificar si el grafo es conexo
+    bool isConnected() {
+        vector<bool> visited(V, false);
+        dfs(0, visited);
+
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // Recorrido DFS
+    void dfs(int u, vector<bool>& visited) {
+        visited[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (adj[u][v] == 1 && !visited[v]) {
+                dfs(v, visited);
+            }
+        }
+    }
+    //crear archivo
+    void printAdjMatrixToFile(string filename) {
+        ofstream file(filename);
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                file << adj[i][j] << " ";
+            }
+            file << endl;
+        }
+        file.close();
+    }
+};
+// Función para generar un número aleatorio entre min y max (inclusive)
+int random(int min, int max) {
+    static random_device rd;
+    static mt19937 gen(rd());
+    uniform_int_distribution<> dis(min, max);
+    return dis(gen);
+}
+int main() {
+    int V, E;
+    cout << "Ingrese el numero de nodos: ";
+    cin >> V;
+    E = V * (V - 1) / 4;  // número de aristas para que el grafo sea denso
+    // Generar el grafo
+    Graph G(V);
+    // Generar aristas al azar
+    for (int i = 0; i < E; i++) {
+        int u = random(0, V - 1);
+        int v = random(0, V - 1);
+        // Evitar aristas entre un nodo y él mismo
+        if (u != v) {
+            G.addEdge(u, v);
+        }
+    }
+            G.printAdjMatrix();
+            G.printAdjMatrixToFile("test.txt");
+        // Verificar si el grafo es conexo
+    if (G.isConnected()) {
+        cout << "El grafo es conexo." << endl;
+    }
+    else {
+        cout << "El grafo es disconexo." << endl;
+    }
+    return 0;
+}
