@@ -1,0 +1,66 @@
+#include "CTable.h"
+#include <algorithm>
+
+class SortedTable : public CTable {
+public:
+    // Default constructor
+    SortedTable() : CTable() {}
+
+    // Constructor that copies data from a CTable object
+    SortedTable(const CTable& other) : CTable(other) {
+        Sort();
+    }
+
+    // Insert a new value into the table in decreasing order
+    void Insert(double value) {
+        // Resize the table if necessary
+        if (m_rows == 0) {
+            Resize(1, 1);
+            m_data[0][0] = value;
+        }
+        else {
+            // Find the position to insert the new value
+            int row = 0, col = 0;
+            while (row < m_rows && value < m_data[row][col]) {
+                row++;
+            }
+            if (row == m_rows) {
+                // Insert at the end of the last row
+                Resize(m_rows + 1, m_cols);
+                m_data[row][col] = value;
+            }
+            else {
+                // Insert in the middle of a row
+                Resize(m_rows, m_cols + 1);
+                for (int i = m_cols - 1; i > col; i--) {
+                    m_data[row][i] = m_data[row][i - 1];
+                }
+                m_data[row][col] = value;
+            }
+        }
+    }
+
+    // Erase a value from the table
+    void Erase(double value) {
+        // Find the position of the value
+        int row = 0, col = 0;
+        while (row < m_rows && value < m_data[row][col]) {
+            row++;
+        }
+        if (row < m_rows && value == m_data[row][col]) {
+            // Erase the value from the table
+            for (int i = col; i < m_cols - 1; i++) {
+                m_data[row][i] = m_data[row][i + 1];
+            }
+            Resize(m_rows, m_cols - 1);
+        }
+    }
+
+private:
+    // Sort the table in decreasing order
+    void Sort() {
+        for (int i = 0; i < m_rows; i++) {
+            std::sort(m_data[i], m_data[i] + m_cols, std::greater<double>());
+        }
+    }
+};
